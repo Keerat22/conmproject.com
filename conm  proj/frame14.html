@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2> trapezoidal rule Method </h2>
+        <h3>  Program for  trapezoidal rule  Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+
+                // Function prototype
+                float trapezoidal_rule(float (*func)(float), float a, float b, int n);
+                
+                // Example function to integrate
+                float function(float x) {
+                    return x * x;  // Example: f(x) = x^2
+                }
+                
+                int main() {
+                    float a, b;  // Integration limits
+                    int n;       // Number of trapezoids
+                    float result;
+                
+                    // Input the limits of integration
+                    printf("Enter the lower limit (a): ");
+                    scanf("%f", &a);
+                    printf("Enter the upper limit (b): ");
+                    scanf("%f", &b);
+                    printf("Enter the number of trapezoids (n): ");
+                    scanf("%d", &n);
+                
+                    // Calculate the area using the trapezoidal rule
+                    result = trapezoidal_rule(function, a, b, n);
+                
+                    // Output the result
+                    printf("The approximate integral from %.2f to %.2f is: %.2f\n", a, b, result);
+                
+                    return 0;
+                }
+                
+                // Function to calculate the integral using the trapezoidal rule
+                float trapezoidal_rule(float (*func)(float), float a, float b, int n) {
+                    float h = (b - a) / n;  // Width of each trapezoid
+                    float area = 0.0;        // Initialize area
+                
+                    // Calculate area
+                    for (int i = 0; i < n; i++) {
+                        float x1 = a + i * h;         // Left endpoint
+                        float x2 = a + (i + 1) * h;   // Right endpoint
+                        area += (func(x1) + func(x2)) * h / 2;  // Area of each trapezoid
+                    }
+                
+                    return area;  // Return total area
+                }
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P> <br>Enter the lower limit (a): 0 </br>
+                <br> Enter the upper limit (b): 1  </br>
+                <br> Enter the number of trapezoids (n): 10 </br>
+                <br> The approximate integral from 0.00 to 1.00 is: 0.33 </br></P>
+        </body>
+    </html>

@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2>Secant Method </h2>
+        <h3>  Program for Secant Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+                #include < math.h>
+                
+                // Define the function for which we want to find the root
+                double f(double x) {
+                    return x * x * x - x - 2;  // Example function
+                }
+                
+                // Secant method implementation
+                double secant_method(double x0, double x1, double tol, int max_iter) {
+                    double x2;
+                    
+                    for (int i = 0; i < max_iter; i++) {
+                        // Calculate the new estimate using the Secant formula
+                        x2 = x1 - (f(x1) * (x1 - x0)) / (f(x1) - f(x0));
+                        
+                        // Check if the result is within the specified tolerance
+                        if (fabs(f(x2)) < tol) {
+                            printf("Root found: %lf after %d iterations\n", x2, i + 1);
+                            return x2;
+                        }
+                
+                        // Update the previous points
+                        x0 = x1;
+                        x1 = x2;
+                    }
+                
+                    printf("Max iterations reached.\n");
+                    return x2;  // Return the last estimate
+                }
+                
+                int main() {
+                    // Parameters
+                    double x0 = 1;  // First initial guess
+                    double x1 = 2;  // Second initial guess
+                    double tolerance = 0.01;  // Tolerance for stopping
+                    int max_iterations = 100;  // Maximum number of iterations
+                
+                    // Run the Secant method
+                    double root = secant_method(x0, x1, tolerance, max_iterations);
+                    printf("Estimated root: %lf\n", root);
+                
+                    return 0;
+                }
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P>Root found: 1.521379 after 7 iterations
+Estimated root: 1.521379</P>
+        </body>
+    </html>

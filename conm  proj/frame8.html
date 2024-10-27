@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2> Gauss seidal  Method </h2>
+        <h3> Program for Gauss seidal Method. </h3>
+        <p> <pre>#include < stdio.h>
+            #include < math.h>
+            
+            #define MAX 10  // Maximum number of variables
+            
+            // Function to perform Gauss-Seidel iteration
+            void gauss_seidel(float a[MAX][MAX], float b[MAX], float x[MAX], int n, float tolerance, int max_iterations) {
+                float x_old[MAX];
+                int iterations = 0;
+            
+                do {
+                    for (int i = 0; i < n; i++) {
+                        x_old[i] = x[i];  // Store the old value of x[i]
+                        float sum = 0.0;
+            
+                        // Calculate the sum of a[i][j] * x[j] for j != i
+                        for (int j = 0; j < n; j++) {
+                            if (j != i) {
+                                sum += a[i][j] * x[j];
+                            }
+                        }
+            
+                        // Update x[i]
+                        x[i] = (b[i] - sum) / a[i][i];
+                    }
+            
+                    iterations++;
+                    
+                    // Check for convergence
+                    float max_error = 0.0;
+                    for (int i = 0; i < n; i++) {
+                        max_error = fmax(max_error, fabs(x[i] - x_old[i]));
+                    }
+            
+                    if (max_error < tolerance) {
+                        break;  // Converged
+                    }
+            
+                } while (iterations < max_iterations);
+            
+                // Print the solution
+                printf("The solution is:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("x[%d] = %.6f\n", i, x[i]);
+                }
+            }
+            
+            int main() {
+                int n;
+                float a[MAX][MAX], b[MAX], x[MAX] = {0};  // Initialize x to 0
+            
+                // Input the number of variables
+                printf("Enter the number of variables: ");
+                scanf("%d", &n);
+            
+                // Input the coefficients of the equations
+                printf("Enter the coefficients of the equations (A matrix):\n");
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        scanf("%f", &a[i][j]);
+                    }
+                }
+            
+                // Input the right-hand side constants
+                printf("Enter the constants (B matrix):\n");
+                for (int i = 0; i < n; i++) {
+                    scanf("%f", &b[i]);
+                }
+            
+                // Perform Gauss-Seidel iteration
+                float tolerance = 0.0001;
+                int max_iterations = 100;
+                gauss_seidel(a, b, x, n, tolerance, max_iterations);
+            
+                return 0;
+            }
+           
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P> <br>Enter the number of variables: 3 </br> 
+                <br>Enter the coefficients of the equations (A matrix): </br>
+                <br>4 -1 0 1</br>
+                <br>-2 5 1 2</br>
+                <br>0 1 3 3</br>
+                <br>Enter the constants (B matrix):</br>
+                <br>15</br>
+                <br>10</br>
+                <br>The solution is:</br>
+                <br>x[0] = 2.000000</br>
+                <br>x[1] = 3.000000</br>
+                <br>x[2] = 1.000000</br></P>
+        </body>
+    </html>

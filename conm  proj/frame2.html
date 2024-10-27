@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2> Regula Falsi Method </h2>
+        <h3>  Program for Regula Falsi Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+                #include < math.h>
+                
+                // Define the function for which we want to find the root
+                double f(double x) {
+                    return x * x * x - x - 2;  // Example function
+                }
+                
+                // Regula Falsi method implementation
+                double regula_falsi(double a, double b, double tol, int max_iter) {
+                    if (f(a) * f(b) >= 0) {
+                        printf("The function must have different signs at a and b.\n");
+                        return -1;  // Indicate an error
+                    }
+                
+                    double c;
+                    for (int i = 0; i < max_iter; i++) {
+                        c = (a * f(b) - b * f(a)) / (f(b) - f(a));  // Calculate the new estimate
+                        if (fabs(f(c)) < tol) {  // Check if we have found the root
+                            printf("Root found: %lf after %d iterations\n", c, i + 1);
+                            return c;
+                        } else if (f(c) * f(a) < 0) {  // Root is in the left subinterval
+                            b = c;
+                        } else {  // Root is in the right subinterval
+                            a = c;
+                        }
+                    }
+                
+                    printf("Max iterations reached.\n");
+                    return c;  // Return the last estimate
+                }
+                
+                int main() {
+                    // Parameters
+                    double a = 1;  // Start of interval
+                    double b = 2;  // End of interval
+                    double tolerance = 0.01;  // Tolerance for stopping
+                    int max_iterations = 100;  // Maximum number of iterations
+                
+                    // Run the Regula Falsi method
+                    double root = regula_falsi(a, b, tolerance, max_iterations);
+                    printf("Estimated root: %lf\n", root);
+                
+                    return 0;
+                }
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P>Root found: 1.521379 after 7 iterations
+Estimated root: 1.521379</P>
+        </body>
+    </html>

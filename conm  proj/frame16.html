@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2> simpsons 3/8 rule Method </h2>
+        <h3>  Program for simpsons 3/8 rule Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+
+                // Function prototype
+                float simpsons_3_8_rule(float (*func)(float), float a, float b, int n);
+                
+                // Example function to integrate
+                float function(float x) {
+                    return x * x;  // Example: f(x) = x^2
+                }
+                
+                int main() {
+                    float a, b;  // Integration limits
+                    int n;       // Number of intervals (must be a multiple of 3)
+                    float result;
+                
+                    // Input the limits of integration
+                    printf("Enter the lower limit (a): ");
+                    scanf("%f", &a);
+                    printf("Enter the upper limit (b): ");
+                    scanf("%f", &b);
+                    printf("Enter the number of intervals (n, must be a multiple of 3): ");
+                    scanf("%d", &n);
+                
+                    // Check if n is a multiple of 3
+                    if (n % 3 != 0) {
+                        printf("Error: Number of intervals must be a multiple of 3.\n");
+                        return 1;
+                    }
+                
+                    // Calculate the area using Simpson's 3/8 rule
+                    result = simpsons_3_8_rule(function, a, b, n);
+                
+                    // Output the result
+                    printf("The approximate integral from %.2f to %.2f is: %.2f\n", a, b, result);
+                
+                    return 0;
+                }
+                
+                // Function to calculate the integral using Simpson's 3/8 rule
+                float simpsons_3_8_rule(float (*func)(float), float a, float b, int n) {
+                    float h = (b - a) / n;  // Width of each interval
+                    float area = func(a) + func(b);  // Initialize area with the first and last terms
+                
+                    // Sum the areas of the odd and even indexed terms
+                    for (int i = 1; i < n; i++) {
+                        float x = a + i * h;
+                        if (i % 3 == 0) {
+                            area += 2 * func(x);  // Every third term (even index)
+                        } else {
+                            area += 3 * func(x);  // Other terms (odd index)
+                        }
+                    }
+                
+                    area *= (3 * h / 8);  // Final area calculation
+                    return area;          // Return total area
+                }
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P> <br>Enter the lower limit (a): 0 </br>
+                <br>Enter the upper limit (b): 1</br>
+                <br> Enter the number of intervals (n, must be a multiple of 3): 6</br>
+                <br> The approximate integral from 0.00 to 1.00 is: 0.33</br></P>
+        </body>
+    </html>

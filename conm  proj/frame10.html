@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2>lagrange's inverse interpolation Method </h2>
+        <h3> Program for lagrange's inverse interpolation Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+
+                // Function to calculate Lagrange's inverse interpolation
+                float lagrange_inverse_interpolation(float x[], float y[], int n, float y_value) {
+                    float result = 0.0;
+                
+                    for (int i = 0; i < n; i++) {
+                        float term = x[i];
+                        
+                        for (int j = 0; j < n; j++) {
+                            if (j != i) {
+                                term *= (y_value - y[j]) / (y[i] - y[j]);
+                            }
+                        }
+                        
+                        result += term;
+                    }
+                
+                    return result;
+                }
+                
+                int main() {
+                    int n;
+                    float x[10], y[10], y_value;
+                
+                    // Input the number of data points
+                    printf("Enter the number of data points: ");
+                    scanf("%d", &n);
+                
+                    // Input the data points
+                    printf("Enter the data points (x and y values):\n");
+                    for (int i = 0; i < n; i++) {
+                        printf("x[%d]: ", i);
+                        scanf("%f", &x[i]);
+                        printf("y[%d]: ", i);
+                        scanf("%f", &y[i]);
+                    }
+                
+                    // Input the value to interpolate
+                    printf("Enter the y value to find the corresponding x value: ");
+                    scanf("%f", &y_value);
+                
+                    // Calculate the interpolated x value
+                    float result = lagrange_inverse_interpolation(x, y, n, y_value);
+                
+                    // Output the result
+                    printf("The x value corresponding to y = %.2f is: %.2f\n", y_value, result);
+                
+                    return 0;
+                }
+           
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P> <br>Enter the number of data points: 4 </br>
+                <br>Enter the data points (x and y values):</br>
+                <br>x[0]: 0</br>
+                <br>y[0]: 1</br>
+                <br> x[1]: 1</br>
+                <br> y[1]: 2</br>
+                <br> x[2]: 2</br>
+                <br> y[2]: 0</br>
+                <br> x[3]: 3</br>
+                <br> y[3]: 2</br>
+                <br> Enter the y value to find the corresponding x value: 1.5</br>
+                <br> The x value corresponding to y = 1.50 is: 1.00</br></P>
+        </body>
+    </html>

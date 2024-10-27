@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title> frames </title>
+    </head>
+    <body>
+        <h2>Newton Raphson Method </h2>
+        <h3>  Program for Newton Raphson Method. </h3>
+        <p> <pre>
+            #include < stdio.h>
+                #include < math.h>
+                
+                // Define the function for which we want to find the root
+                double f(double x) {
+                    return x * x * x - x - 2;  // Example function
+                }
+                
+                // Define the derivative of the function
+                double f_prime(double x) {
+                    return 3 * x * x - 1;  // Derivative of the example function
+                }
+                
+                // Newton-Raphson method implementation
+                double newton_raphson(double x0, double tol, int max_iter) {
+                    double x1;
+                
+                    for (int i = 0; i < max_iter; i++) {
+                        // Calculate the new estimate using the Newton-Raphson formula
+                        x1 = x0 - f(x0) / f_prime(x0);
+                        
+                        // Check if the result is within the specified tolerance
+                        if (fabs(f(x1)) < tol) {
+                            printf("Root found: %lf after %d iterations\n", x1, i + 1);
+                            return x1;
+                        }
+                
+                        // Update the previous point
+                        x0 = x1;
+                    }
+                
+                    printf("Max iterations reached.\n");
+                    return x1;  // Return the last estimate
+                }
+                
+                int main() {
+                    // Parameters
+                    double x0 = 1.5;  // Initial guess
+                    double tolerance = 0.01;  // Tolerance for stopping
+                    int max_iterations = 100;  // Maximum number of iterations
+                
+                    // Run the Newton-Raphson method
+                    double root = newton_raphson(x0, tolerance, max_iterations);
+                    printf("Estimated root: %lf\n", root);
+                
+                    return 0;
+                }
+            </pre> </p>
+    </body>
+    </html>
+    <html>
+        <body>
+            <h3> OUTPUT</h3>
+            <P>Root found: 1.521379 after 5 iterations
+                Estimated root: 1.521379</P>
+        </body>
+    </html>
